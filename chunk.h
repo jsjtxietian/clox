@@ -16,7 +16,7 @@ typedef enum
 
 typedef struct
 {
-	// the number of elements in the array we have allocated (“capacity”) and 
+	//the number of elements in the array we have allocated (“capacity”) and 
 	//how many of those allocated entries are actually in use (“count”).
 	int count;
 	int capacity;

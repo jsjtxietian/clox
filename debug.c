@@ -14,6 +14,7 @@ static int constantInstruction(const char* name, Chunk* chunk, int offset)
     printf("%-16s %4d '", name, constant);                      
     printValue(chunk->constants.values[constant]);              
     printf("'\n");
+    //OP_CONSTANT is two—one for the opcode and one for the operand
     return offset + 2;                                              
 }                
 
