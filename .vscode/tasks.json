@@ -3,13 +3,13 @@
     "tasks": [
         {
             "type": "shell",
-            "label": "C/C++: gcc-7 build active file",
-            "command": "/usr/bin/gcc-7",
+            "label": "C/C++: gcc build active file",
+            "command": "/usr/bin/gcc",
             "args": [
                 "-g",
                 "${workspaceFolder}/*.c",
                 "-o",
-                "${fileDirname}/main"
+                "${workspaceFolder}/main"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -20,7 +20,7 @@
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
+              }
         }
     ]
 }
