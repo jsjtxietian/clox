@@ -23,6 +23,7 @@ static InterpretResult run()
 {
 #define READ_BYTE() (*vm.ip++)
 #define READ_CONSTANT() (vm.chunk->constants.values[READ_BYTE()])
+
 //can pass an operator as an argument to a macro
 //ensure those statements all end up in the same scope when the macro is expanded
 //not use block because ;

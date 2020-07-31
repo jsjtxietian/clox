@@ -4,6 +4,8 @@
 #include "chunk.h"
 #include "value.h"
 
+//fix size
+//without overflow check
 #define STACK_MAX 256
 
 typedef struct
@@ -33,5 +35,11 @@ void freeVM();
 InterpretResult interpret(Chunk *chunk);
 void push(Value value);
 Value pop();
+
+//todo
+//To interpret OP_NEGATE, we pop the operand, negate the value, and then push the result. 
+//That’s a simple implementation, but it increments and decrements stackTop unnecessarily, 
+//since the stack ends up the same height in the end. 
+//It might be faster to simply negate the value in place on the stack and leave stackTop alone. 
 
 #endif
