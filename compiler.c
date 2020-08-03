@@ -4,6 +4,10 @@
 #include "compiler.h"
 #include "scanner.h"
 
+#ifdef DEBUG_PRINT_CODE
+    #include "debug.h"
+#endif
+
 typedef struct
 {
     Token current;
@@ -128,7 +132,18 @@ static void emitReturn()
 static void endCompiler()
 {
     emitReturn();
+#ifdef DEBUG_PRINT_CODE
+    if (!parser.hadError)
+    {
+        disassembleChunk(currentChunk(), "code");
+    }
+#endif
 }
+
+//forward declarations to handle the fact that our grammar is recursive
+static void expression();
+static ParseRule *getRule(TokenType type);
+static void parsePrecedence(Precedence precedence);
 
 static void binary()
 {
@@ -212,6 +227,7 @@ static void unary()
     }
 }
 
+// C99’s designated initializer syntax.
 ParseRule rules[] = {
     [TOKEN_LEFT_PAREN] = {grouping, NULL, PREC_NONE},
     [TOKEN_RIGHT_PAREN] = {NULL, NULL, PREC_NONE},
@@ -254,11 +270,34 @@ ParseRule rules[] = {
     [TOKEN_ERROR] = {NULL, NULL, PREC_NONE},
     [TOKEN_EOF] = {NULL, NULL, PREC_NONE},
 };
-//here
+
+static ParseRule *getRule(TokenType type)
+{
+    return &rules[type];
+}
 
 static void parsePrecedence(Precedence precedence)
 {
-    // What goes here?
+    //The first token is always going to belong to some kind of prefix expression, by definition.
+    advance();
+    ParseFn prefixRule = getRule(parser.previous.type)->prefix;
+    if (prefixRule == NULL)
+    {
+        error("Expect expression.");
+        return;
+    }
+
+    prefixRule();
+
+    // we look for an infix parser for the next token. If we find one, it means the prefix expression we already
+    //compiled might be an operand for it. But only if the call to parsePrecedence() has a precedence that is low enough to permit that infix operator.
+
+    while (precedence <= getRule(parser.current.type)->precedence)
+    {
+        advance();
+        ParseFn infixRule = getRule(parser.previous.type)->infix;
+        infixRule();
+    }
 }
 
 static void expression()

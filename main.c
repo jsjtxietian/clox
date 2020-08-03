@@ -92,7 +92,5 @@ int main(int argc, const char *argv[])
 
 	freeVM();
 
-	freeVM();
-
 	return 0;
 }
