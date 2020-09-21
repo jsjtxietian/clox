@@ -20,8 +20,7 @@ typedef struct
 	Value *stackTop;
 } VM;
 
-//a compiler that reports static errors and
-//a VM that detects runtime errors, the interpreter will use this to know
+//a compiler that reports static errors and a VM that detects runtime errors, the interpreter will use this to know
 //how to set the exit code of the process
 typedef enum
 {

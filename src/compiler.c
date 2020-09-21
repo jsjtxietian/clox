@@ -152,8 +152,10 @@ static void binary()
 
     // Compile the right operand.
     ParseRule *rule = getRule(operatorType);
-    parsePrecedence((Precedence)(rule->precedence + 1));
 
+    //use one level above origin’s precedence for left assicioative 
+    parsePrecedence((Precedence)(rule->precedence + 1)); 
+    
     // Emit the operator instruction.
     switch (operatorType)
     {
@@ -302,6 +304,7 @@ static void parsePrecedence(Precedence precedence)
 
 static void expression()
 {
+    //We simply parse the lowest precedence level, which subsumes all of the higher precedence expressions too. 
     parsePrecedence(PREC_ASSIGNMENT);
 }
 

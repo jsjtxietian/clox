@@ -24,10 +24,8 @@ static void repl()
 	}
 }
 
-//The difficult part is that we want to allocate a big enough string to read the whole file,
-//but we don’t know how big the file is until we’ve read it.
-//We open the file, but before reading it, we seek to the very end
-//using fseek(). Then we call ftell() which tells us how many bytes
+//The difficult part is that we want to allocate a big enough string to read the whole file, but we don’t know how big the file is until we’ve read it.
+//We open the file, but before reading it, seek to the very end using fseek(). Then we call ftell() which tells us how many bytes
 //we are from the start of the file.
 static char *readFile(const char *path)
 {

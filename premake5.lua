@@ -43,7 +43,11 @@ project "Clox"
 		}
 
 	filter "configurations:Debug"
-		defines "CLOX_DEBUG"
+		defines 
+		{
+			"DEBUG_PRINT_CODE",
+			"DEBUG_TRACE_EXECUTION"
+		}
 		runtime "Debug"
 		symbols "on"
 
