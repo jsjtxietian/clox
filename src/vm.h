@@ -18,6 +18,7 @@ typedef struct
 	Value stack[STACK_MAX];
 	//stackTop points to where the next value to be pushed will go
 	Value *stackTop;
+	Obj *objects;
 } VM;
 
 //a compiler that reports static errors and a VM that detects runtime errors, the interpreter will use this to know
@@ -28,6 +29,8 @@ typedef enum
 	INTERPRET_COMPILE_ERROR,
 	INTERPRET_RUNTIME_ERROR
 } InterpretResult;
+
+extern VM vm;
 
 void initVM();
 void freeVM();

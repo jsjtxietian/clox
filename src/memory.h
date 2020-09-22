@@ -2,6 +2,13 @@
 #define clox_memory_h
 
 #include <stdlib.h>
+#include "common.h"
+#include "object.h"
+
+#define ALLOCATE(type, count) \
+    (type *)reallocate(NULL, 0, sizeof(type) * (count))
+
+#define FREE(type, pointer) reallocate(pointer, sizeof(type), 0)
 
 //it scales based on the old size. We grow by a factor of two, which is pretty typical.
 //1.5× is another common choice.
@@ -21,5 +28,6 @@
 //Non‑zero	Smaller than oldSize	Shrink existing allocation.
 //Non‑zero	Larger than oldSize	    Grow existing allocation.
 void *reallocate(void *previous, size_t oldSize, size_t newSize);
+void freeObjects();
 
 #endif
