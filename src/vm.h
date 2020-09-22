@@ -3,6 +3,7 @@
 
 #include "chunk.h"
 #include "value.h"
+#include "table.h"
 
 //fix size
 //without overflow check
@@ -18,6 +19,7 @@ typedef struct
 	Value stack[STACK_MAX];
 	//stackTop points to where the next value to be pushed will go
 	Value *stackTop;
+	Table strings;
 	Obj *objects;
 } VM;
 

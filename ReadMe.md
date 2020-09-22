@@ -15,6 +15,8 @@
 * Add support for :? to the compiler. 
 * Each string requires two separate dynamic allocations—one for the ObjString and a second for the character array. Accessing the characters from a value requires two pointer indirections, which can be bad for performance. A more efficient solution relies on a technique called “flexible array members”. Use that to store the ObjString and its character array in a single contiguous allocation.
 * We could keep track of which ObjStrings own their character array and which are “constant strings” that just point back to the original source string or some other non-freeable location. Add support for this.
+* Add support for keys of the other primitive types: numbers, Booleans, and nil.
+* Write a handful of different benchmark programs to validate our hash table implementation.
 
 
 ####  Test Cases
@@ -24,3 +26,6 @@
 #### Pratt parsers
 * http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/
 * https://matklad.github.io/2020/04/13/simple-but-powerful-pratt-parsing.html
+#### hash table
+* http://www.isthe.com/chongo/tech/comp/fnv/
+*  “double hashing”, “cuckoo hashing”, “Robin Hood hashing”,etc
