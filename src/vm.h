@@ -20,6 +20,7 @@ typedef struct
 	//stackTop points to where the next value to be pushed will go
 	Value *stackTop;
 	Table strings;
+	Table globals;
 	Obj *objects;
 } VM;
 
